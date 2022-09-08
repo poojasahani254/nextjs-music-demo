@@ -5,7 +5,12 @@ const Ads: FC<{ path: string }> = ({ path }) => {
     try {
       if (typeof window !== "undefined") {
         // @ts-ignore
-        window.adsbygoogle = (window.adsbygoogle || []).push({});
+        if (window.adsbygoogle) {
+          // @ts-ignore
+          const adsbygoogle = (window.adsbygoogle || []);
+          // @ts-ignore
+          window.adsbygoogle = adsbygoogle.push({});
+        }
       }
     } catch (err) {
       console.log(err);
@@ -13,7 +18,7 @@ const Ads: FC<{ path: string }> = ({ path }) => {
   }, []);
 
   return (
-    <div key={path} style={{height: "calc(100vh - 69px)"}}>
+    <div key={path} style={{ height: "calc(100vh - 69px)" }}>
       <ins
         className="adsbygoogle adsense"
         style={{ display: "block", height: "100vh" }}
