@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const signedInPages = ["/", "/playlist"];
+const signedInPages = ["/", "/playlist", "/artists"];
 
 export default function middleware(req: NextRequest) {
   if (signedInPages.find((p) => p === req.nextUrl.pathname)) {

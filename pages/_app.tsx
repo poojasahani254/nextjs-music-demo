@@ -1,24 +1,27 @@
-import "../styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-// import type { AppProps } from "next/app";
-// import { ThemeProvider } from "theme-ui"; //Testing with theme-ui
 import Theme from "../appConfiguration/chakraTheme";
 import PlayerLayout from "../components/container/PlayerLayout";
+import { StoreProvider } from "easy-peasy";
+import { useStore } from "react-redux";
+import { wrapper } from "../lib/store";
 
-const theme = extendTheme({ Theme });
+const theme = extendTheme({ ...Theme });
 
 function MyApp({ Component, pageProps }: any) {
+  const store = useStore();
   return (
     <ChakraProvider theme={theme} resetCSS={true}>
-      {Component?.authPage ? (
-        <Component {...pageProps} />
-      ) : (
-        <PlayerLayout>
+      <StoreProvider store={store}>
+        {Component?.authPage ? (
           <Component {...pageProps} />
-        </PlayerLayout>
-      )}
+        ) : (
+          <PlayerLayout>
+            <Component {...pageProps} />
+          </PlayerLayout>
+        )}
+      </StoreProvider>
     </ChakraProvider>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
