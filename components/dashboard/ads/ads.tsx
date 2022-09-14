@@ -22,7 +22,7 @@ const Ads: FC<{ path: string }> = ({ path }) => {
       <ins
         className="adsbygoogle adsense"
         style={{ display: "block", height: "calc(100vh - 69px)" }}
-        data-ad-client="pub-9733560809553550"
+        data-ad-client="ca-pub-9733560809553550"
         data-ad-slot="7741269660"
         data-ad-format="auto"
         data-adtest="on"

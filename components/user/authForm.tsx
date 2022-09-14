@@ -53,17 +53,21 @@ const AuthForm: FC<{ mode: "signIn" | "signup" }> = ({ mode }) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
+  function handleSignUp() {
+    router.push("/signup")
+  }
+
   return (
     <Box
       minH={"100vh"}
       alignItems={"center"}
       justifyContent={"center"}
-      bg={useColorModeValue("gray.900", "gray.500")}
+      bg={useColorModeValue("brand.800", "brand.700")}
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Box
           rounded={"lg"}
-          bg={useColorModeValue("gray.800", "gray.600")}
+          bg={useColorModeValue("brand.600", " brand.600")}
           boxShadow={"lg"}
           p={8}
         >
@@ -72,11 +76,10 @@ const AuthForm: FC<{ mode: "signIn" | "signup" }> = ({ mode }) => {
               Sign in to your account
             </Heading>
             <Text fontSize={"sm"} color={"gray.50"}>
-              to enjoy all of our cool <Link color={"blue.400"}>features</Link>{" "}
-              ✌️
+              to enjoy all of our cool features ✌️
             </Text>
           </Stack>
-          <Stack spacing={4} marginTop={20} color={"gray.50"}>
+          <Stack spacing={4} marginTop={20} color={"brand.50"}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input
@@ -136,6 +139,7 @@ const AuthForm: FC<{ mode: "signIn" | "signup" }> = ({ mode }) => {
               _hover={{
                 bg: "gray.400",
               }}
+              onClick={handleSignUp}
             >
               Sign up
             </Button>

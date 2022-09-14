@@ -10,6 +10,21 @@ const States = {
   changeActiveSong: action((state: any, payload: any) => {
     state.activeSong = payload;
   }),
+
+  favoriteSongs: [],
+  changeFavoriteSong: action((state: any, payload: any) => {
+    state.favoriteSongs = [
+      ...new Map(
+        [...state.favoriteSongs, payload].map((value, index, array) => [
+          value["songId"],
+          value,
+        ])
+      ).values(),
+    ];
+  }),
+  changeFavoriteSongs: action((state: any, payload: any) => {
+    state.favoriteSongs = payload;
+  }),
 };
 
 const initStore = () => {

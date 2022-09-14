@@ -19,16 +19,13 @@ export const validateRoute = (
           throw new Error("User not exists !");
         }
       } catch (error) {
-        res.status(401);
-        res.json({ error: "Not Authorized" });
-        return;
+        return res.status(401).json({ error: "Not Authorized" });
       }
 
       return handler(req, res, user);
+    } else {
+      return res.status(401).json({ error: "Not Authorized" });
     }
-
-    res.status(401);
-    res.json({ error: "Not Authorized" });
   };
 };
 

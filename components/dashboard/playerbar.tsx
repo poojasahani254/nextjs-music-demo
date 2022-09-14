@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
-import { useStoreActions } from "easy-peasy";
+import {useStoreActions, useStoreState} from "easy-peasy";
 import ReactHowler from "react-howler";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { formatTime } from "../../lib/formatters";
@@ -21,21 +21,37 @@ import {
   MdOutlinePlayCircleFilled,
   MdOutlinePauseCircleFilled,
   MdOutlineRepeat,
+  MdVolumeUp,
+  MdVolumeOff,
+  MdFavorite,
+  MdPlaylistAdd,
 } from "react-icons/md";
+import fetcher from "../../lib/fetcher";
 
 const PlayerBar: FC<{ songs: any; activeSong: any }> = ({
   songs,
   activeSong,
 }) => {
+  const setActiveSong = useStoreActions((state: any) => state.changeActiveSong);
+  const setFavoriteSong = useStoreActions(
+    (state: any) => state.changeFavoriteSongs
+  );
+  const favoriteSongs = useStoreState((state: any) => state.favoriteSongs);
+
   const [playing, setPlaying] = useState(true);
   const [seek, setSeek] = useState(0.0);
+  const [volume, setVolume] = useState(0.7);
   const [isSeeking, setIsSeeking] = useState(false);
   const [repeat, setRepeat] = useState(false);
+  const [favorite, setFavorite] = useState(
+    favoriteSongs.find((value: any) => value.songId === activeSong.id)
+  );
+
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
   const soundRef = useRef(null);
   const repeatRef = useRef(repeat);
-  const setActiveSong = useStoreActions((state: any) => state.changeActiveSong);
+
   const [index, setIndex] = useState(
     songs.findIndex((s: any) => s.id === activeSong.id)
   );
@@ -104,6 +120,11 @@ const PlayerBar: FC<{ songs: any; activeSong: any }> = ({
     (soundRef.current as any).seek(e[0]);
   };
 
+  const onVolume = (e: any) => {
+    setVolume(parseFloat(e[0]));
+    (soundRef.current as any).volume(e[0]);
+  };
+
   const onLoad = () => {
     if (soundRef.current) {
       const songDuration = (soundRef.current as any).duration();
@@ -117,6 +138,29 @@ const PlayerBar: FC<{ songs: any; activeSong: any }> = ({
       (soundRef.current as any).seek(0);
     } else {
       nextSong();
+    }
+  };
+
+  const onFavorite = async () => {
+    let exists = favoriteSongs.find(
+      (value: any) => value.songId === activeSong.id
+    );
+
+    if (!exists) {
+      const rsp = await fetcher(
+        "/favorite/create",
+        {
+          songId: activeSong.id,
+        },
+        "POST"
+      );
+
+      let jsonResponse = await rsp.json();
+
+      if (rsp.ok && rsp.status === 200) {
+        setFavoriteSong(jsonResponse.favSong);
+        // setFavorite((state) => !state);
+      }
     }
   };
 
@@ -177,14 +221,18 @@ const PlayerBar: FC<{ songs: any; activeSong: any }> = ({
             </Text>
           </Flex>
         </Flex>
-        <Flex width={"60%"} align={"center"}>
-          <Box
+        <Flex width={"100%"} align={"center"}>
+          <Flex
             color="brand.50"
             width="100%"
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <ButtonGroup width={"50%"} justifyContent={"space-evenly"}>
+            <ButtonGroup
+              width={"50%"}
+              alignItems={"center"}
+              justifyContent={"space-evenly"}
+            >
               <IconButton
                 outline="none"
                 variant="link"
@@ -242,7 +290,63 @@ const PlayerBar: FC<{ songs: any; activeSong: any }> = ({
                 icon={<MdOutlineRepeat />}
               />
             </ButtonGroup>
-          </Box>
+            <Flex width={"50%"} alignItems={"center"}>
+              <Flex
+                width={"40%"}
+                alignItems={"center"}
+                justifyContent={"center"}
+              >
+                <IconButton
+                  outline="none"
+                  variant="link"
+                  aria-label="shuffle"
+                  fontSize="24px"
+                  color={"gray.600"}
+                  onClick={() => onVolume([0])}
+                  icon={volume === 0 ? <MdVolumeOff /> : <MdVolumeUp />}
+                />
+                <RangeSlider
+                  marginLeft={"5px"}
+                  aria-label={["min", "max"]}
+                  step={0.1}
+                  width={"100px"}
+                  min={0}
+                  id="player-range"
+                  max={1}
+                  onChange={onVolume}
+                  value={[volume]}
+                  onChangeStart={() => setIsSeeking(true)}
+                  onChangeEnd={() => setIsSeeking(false)}
+                >
+                  <RangeSliderTrack bg="brand.800">
+                    <RangeSliderFilledTrack bg="gray.600" />
+                  </RangeSliderTrack>
+                  <RangeSliderThumb index={0} />
+                </RangeSlider>
+              </Flex>
+              <Flex marginLeft={"5rem"} alignItems={"center"} width={"60%"}>
+                <IconButton
+                  outline="none"
+                  variant="link"
+                  aria-label="shuffle"
+                  fontSize="28px"
+                  color={favorite ? "red.600" : "gray.600"}
+                  onClick={onFavorite}
+                  icon={<MdFavorite />}
+                />
+                <IconButton
+                  marginLeft={"1rem"}
+                  outline="none"
+                  variant="link"
+                  aria-label="shuffle"
+                  fontSize="28px"
+                  // color={repeat ? "red.600" : "gray.600"}
+                  // onClick={onRepeat}
+                  icon={<MdPlaylistAdd />}
+                />
+              </Flex>
+            </Flex>
+          </Flex>
         </Flex>
       </Flex>
     </Box>

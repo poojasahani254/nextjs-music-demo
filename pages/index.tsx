@@ -1,11 +1,21 @@
 import { Box, Flex, Text, Image, Button } from "@chakra-ui/react";
 import prisma from "../lib/prisma";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useRouter } from "next/router";
 import { validateToken } from "../lib/auth";
+import Slider from "../components/dashboard/slider";
+import classes from "../styles/custom.module.css";
+import { useStoreActions } from "easy-peasy";
 
-const Home: FC<{ artists: any }> = ({ artists }) => {
+const Home: FC<{ artists: any; favSongs: any }> = ({ artists, favSongs }) => {
   const router = useRouter();
+  const setFavoriteSong = useStoreActions(
+    (state: any) => state.changeFavoriteSongs
+  );
+
+  useEffect(() => {
+    setFavoriteSong(favSongs);
+  }, [favSongs]);
 
   function onArtistClick(artist: any) {
     router.push(`/artists/${artist.id}`);
@@ -19,7 +29,9 @@ const Home: FC<{ artists: any }> = ({ artists }) => {
       color={"brand.50"}
       paddingY={"15px"}
       paddingX={"35px"}
+      className={classes.box}
     >
+      <Slider />
       <Box marginBottom="20px">
         <Text fontSize="2xl" fontWeight="bold">
           Top Artist Songs
@@ -62,9 +74,10 @@ export const getServerSideProps = async ({ req }: any) => {
   }
 
   const artists = await prisma.artist.findMany({});
+  const favSongs = await prisma.favorite.findMany({});
 
   return {
-    props: { artists },
+    props: { artists, favSongs },
   };
 };
 

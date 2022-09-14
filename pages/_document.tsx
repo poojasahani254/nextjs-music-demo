@@ -5,7 +5,7 @@ import Script from "next/script";
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html en={"us"}>
+      <Html>
         {/*<Script*/}
         {/*    async={true}*/}
         {/*    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9733560809553550"*/}
