@@ -7,7 +7,7 @@ const Ads: FC<{ path: string }> = ({ path }) => {
         // @ts-ignore
         if (window.adsbygoogle) {
           // @ts-ignore
-          const adsbygoogle = (window.adsbygoogle || []);
+          const adsbygoogle = window.adsbygoogle || [];
           // @ts-ignore
           window.adsbygoogle = adsbygoogle.push({});
         }
@@ -20,14 +20,13 @@ const Ads: FC<{ path: string }> = ({ path }) => {
   return (
     <div key={path} style={{ height: "calc(100vh - 69px)" }}>
       <ins
-        className="adsbygoogle adsense"
         style={{ display: "block" }}
         data-ad-client="ca-pub-9733560809553550"
-        data-ad-slot="7741269660"
+        data-ad-slot="6722318571"
         data-ad-format="auto"
-        data-adtest="on"
         data-full-width-responsive="true"
-        data-ad-status={"filled"}
+        className="adsbygoogle"
+        data-adtest="on"
       />
     </div>
   );

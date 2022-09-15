@@ -5,6 +5,8 @@ CREATE TABLE "User" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "resetToken" TEXT,
+    "resetTokenExpire" TIMESTAMP(3),
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

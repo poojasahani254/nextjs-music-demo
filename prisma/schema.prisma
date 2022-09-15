@@ -19,6 +19,8 @@ model User {
   password      String
   playlists     Playlist[]
   favorite      Favorite[]
+  resetToken    String?
+  resetTokenExpire DateTime?
 }
 
 

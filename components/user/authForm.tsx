@@ -1,6 +1,5 @@
 import {
   Box,
-  Link,
   Input,
   Button,
   useColorModeValue,
@@ -15,6 +14,7 @@ import {
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { auth } from "../../lib/mutation";
+import Link from "next/link";
 
 interface AuthFormState {
   email: string;
@@ -43,7 +43,7 @@ const AuthForm: FC<{ mode: "signIn" | "signup" }> = ({ mode }) => {
 
     if (rsp.ok && rsp.status === 200) {
       setIsLoading(false);
-      router.push("/");
+      await router.push("/");
     } else {
       setIsLoading(false);
     }
@@ -53,8 +53,8 @@ const AuthForm: FC<{ mode: "signIn" | "signup" }> = ({ mode }) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-  function handleSignUp() {
-    router.push("/signup")
+  async function handleSignUp() {
+    await router.push("/signup")
   }
 
   return (
@@ -105,7 +105,11 @@ const AuthForm: FC<{ mode: "signIn" | "signup" }> = ({ mode }) => {
                 justify={"space-between"}
               >
                 <Checkbox>Remember me</Checkbox>
-                <Link color={"blue.400"}>Forgot password?</Link>
+                <Link href={"/forgot-password"}>
+                  <Text color={"blue.400"} as="u" cursor={"pointer"}>
+                    Forgot password?
+                  </Text>
+                </Link>
               </Stack>
               <Button
                 onClick={handleSubmit}
