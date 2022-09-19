@@ -17,7 +17,7 @@ const ArtistSongs: FC<ArtistProps> = (props) => {
       title={artists[0].name}
       subtitle="playlist"
       description={`${songs.length} songs`}
-      image={`https://picsum.photos/400?random=${artists[0].id}`}
+      image={artists[0].photo}
     >
       <Box bg={`brand.800`} paddingX="30px">
         <ListSongs songs={songs} />

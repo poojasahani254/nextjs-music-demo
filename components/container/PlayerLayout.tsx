@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import SideBar from "./SideBar";
+import RightSidePanel from "./RightSidePanel";
 import Header from "../dashboard/header/header";
 import PlayerBar from "../dashboard/playerbar";
 import { useStoreState } from "easy-peasy";
@@ -22,10 +22,19 @@ const PlayerLayout = ({ children }: { children: ReactNode }) => {
       >
         <Header />
       </Box>
-      <Flex width={"100%"} left={"0"} top={"8%"} position={"absolute"}>
-        <Box width={"80%"}>{children}</Box>
-        <Box width={"20%"}>
-          <SideBar />
+      <Flex
+        width={"100%"}
+        left={"0"}
+        top={"8%"}
+        position={"absolute"}
+        display={{md: "flex"}}
+        direction={{ base: 'row', md: 'column', lg:"row", sm: "column"}}
+      >
+        <Box width={["100%", "100%", "100%", "80%"]} flexShrink={0}>
+          {children}
+        </Box>
+        <Box width={["100%", "100%", "100%", "20%"]}>
+          <RightSidePanel />
         </Box>
       </Flex>
       {activeSong ? (

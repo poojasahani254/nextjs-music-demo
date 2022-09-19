@@ -42,6 +42,7 @@ model Artist {
     updatedAt     DateTime @updatedAt
     songs         Songs[]
     name          String   @unique
+    photo         String
 }
 
 model Playlist {

@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { FC } from "react";
-import fetcher from "../../../lib/fetcher";
+import fetcher from "../../../helper/fetcher";
 
 interface SendEmailProps {
   onContinue: (rspData?: any) => void;

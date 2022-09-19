@@ -1,5 +1,5 @@
-import { validateRoute } from "../../lib/auth";
-import prisma from "../../lib/prisma";
+import { validateRoute } from "../../helper/auth";
+import prisma from "../../helper/prisma";
 
 export default validateRoute(async (req, res, user) => {
   const playlistsCount = await prisma.playlist.count({

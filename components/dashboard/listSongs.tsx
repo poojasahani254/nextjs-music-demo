@@ -3,7 +3,7 @@ import { Table, Thead, Td, Tr, Tbody, Th, IconButton } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { useStoreActions } from "easy-peasy";
-import { formatDate, formatTime } from "../../lib/formatters";
+import { formatDate, formatTime } from "../../helper/formatters";
 
 const ListSongs = ({ songs }: any) => {
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs);

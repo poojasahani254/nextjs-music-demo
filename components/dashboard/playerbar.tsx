@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "@chakra-ui/layout";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import ReactHowler from "react-howler";
 import React, { FC, useEffect, useRef, useState } from "react";
-import { formatTime } from "../../lib/formatters";
+import { formatTime } from "../../helper/formatters";
 import {
   Avatar,
   ButtonGroup,
@@ -26,7 +26,7 @@ import {
   MdFavorite,
   MdPlaylistAdd,
 } from "react-icons/md";
-import fetcher from "../../lib/fetcher";
+import fetcher from "../../helper/fetcher";
 
 const PlayerBar: FC<{ songs: any; activeSong: any }> = ({
   songs,

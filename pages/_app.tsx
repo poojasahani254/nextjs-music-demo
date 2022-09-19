@@ -1,16 +1,18 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import Theme from "../appConfiguration/chakraTheme";
+import Theme from "../config/chakraTheme";
 import PlayerLayout from "../components/container/PlayerLayout";
 import { StoreProvider } from "easy-peasy";
 import { useStore } from "react-redux";
-import { wrapper } from "../lib/store";
+import { wrapper } from "../helper/store";
 import "../styles/globals.css";
+import ErrorBoundary from "../components/container/ErrorBoundary";
 const theme = extendTheme({ ...Theme });
 
 function MyApp({ Component, pageProps }: any) {
   const store = useStore();
+
   return (
-    <>
+    <ErrorBoundary>
       <ChakraProvider theme={theme} resetCSS={true}>
         <StoreProvider store={store}>
           {Component?.authPage ? (
@@ -22,7 +24,7 @@ function MyApp({ Component, pageProps }: any) {
           )}
         </StoreProvider>
       </ChakraProvider>
-    </>
+    </ErrorBoundary>
   );
 }
 

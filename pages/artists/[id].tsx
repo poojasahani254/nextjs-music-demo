@@ -1,6 +1,6 @@
 import ArtistSongs from "../../components/dashboard/artists/artist";
-import { validateToken } from "../../lib/auth";
-import prisma from "../../lib/prisma";
+import { validateToken } from "../../helper/auth";
+import prisma from "../../helper/prisma";
 
 const ArtistsSongs = ({ songs, artists }: any) => {
   return <ArtistSongs songs={songs} artists={artists} />;

@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import Ads from "../dashboard/ads/ads";
 
-const SideBar = () => {
+const RightSidePanel = () => {
   return (
     <Box
       width={"100%"}
@@ -15,4 +15,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default RightSidePanel;

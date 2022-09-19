@@ -30,5 +30,6 @@ export const validateRoute = (
 };
 
 export const validateToken = (token: any) => {
-  return jwt.verify(token, "test@123");
+  if (token) return jwt.verify(token, "test@123");
+  else return null;
 };

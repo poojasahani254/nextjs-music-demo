@@ -1,11 +1,12 @@
-import { Box, Flex, Text, Image, Button } from "@chakra-ui/react";
-import prisma from "../lib/prisma";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import prisma from "../helper/prisma";
 import { FC, useEffect } from "react";
 import { useRouter } from "next/router";
-import { validateToken } from "../lib/auth";
+import { validateToken } from "../helper/auth";
 import Slider from "../components/dashboard/slider";
 import classes from "../styles/custom.module.css";
 import { useStoreActions } from "easy-peasy";
+import Image from "next/image";
 
 const Home: FC<{ artists: any; favSongs: any }> = ({ artists, favSongs }) => {
   const router = useRouter();
@@ -48,7 +49,11 @@ const Home: FC<{ artists: any; favSongs: any }> = ({ artists, favSongs }) => {
             onClick={() => onArtistClick(artist)}
           >
             <Box bg="brand.900" borderRadius="5px" width="100%">
-              <Image src="https://placekitten.com/300/300" borderRadius="5px" />
+              <Image
+                src={artist.photo || "https://placekitten.com/300/300"}
+                height={300}
+                width={300}
+              />
               <Box marginTop={"2px"} color={"white"}>
                 <Text fontSize="16px">{artist.name}</Text>
               </Box>
@@ -61,7 +66,7 @@ const Home: FC<{ artists: any; favSongs: any }> = ({ artists, favSongs }) => {
 };
 
 export const getServerSideProps = async ({ req }: any) => {
-  let user;
+  let user, artists, favSongs;
   try {
     user = validateToken(req.cookies.DEMO_ACCESS_TOKEN);
   } catch (e) {
@@ -73,8 +78,15 @@ export const getServerSideProps = async ({ req }: any) => {
     };
   }
 
-  const artists = await prisma.artist.findMany({});
-  const favSongs = await prisma.favorite.findMany({});
+  try {
+    artists = await prisma.artist.findMany({});
+    favSongs = await prisma.favorite.findMany({});
+  } catch (e) {
+    console.log("error--", e);
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: { artists, favSongs },

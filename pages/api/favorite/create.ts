@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../lib/prisma";
-import { validateRoute } from "../../../lib/auth";
+import prisma from "../../../helper/prisma";
+import { validateRoute } from "../../../helper/auth";
 
 export default validateRoute(
   async (req: NextApiRequest, res: NextApiResponse, user: any) => {

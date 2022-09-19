@@ -1,9 +1,11 @@
 export const artistsData: {
   name: string;
+  photo: string;
   songs: any[];
 }[] = [
   {
-    name: "Glitch",
+    name: "Shreya Ghoshal",
+    photo: "/artist/shreya.jpg",
     songs: [
       {
         name: "Fermi Paradox",
@@ -15,6 +17,7 @@ export const artistsData: {
   },
   {
     name: "Purple Cat",
+    photo: "/artist/shreya.jpg",
     songs: [
       {
         name: "Long Day",
@@ -25,6 +28,7 @@ export const artistsData: {
   },
   {
     name: "Ben Sound",
+    photo: "/artist/shreya.jpg",
     songs: [
       {
         name: "The Elevator Bossa Nova",
@@ -35,6 +39,7 @@ export const artistsData: {
   },
   {
     name: "LiQWYD",
+    photo: "/artist/shreya.jpg",
     songs: [
       {
         name: "Winter",
@@ -45,6 +50,7 @@ export const artistsData: {
   },
   {
     name: "FSM Team",
+    photo: "/artist/shreya.jpg",
     songs: [
       {
         name: "Eternal Springtime",

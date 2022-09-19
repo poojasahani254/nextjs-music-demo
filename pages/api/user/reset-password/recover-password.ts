@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../../lib/prisma";
+import prisma from "../../../../helper/prisma";
 import bcrypt from "bcrypt";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

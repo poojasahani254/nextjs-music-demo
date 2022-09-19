@@ -1,5 +1,5 @@
-import { validateToken } from "../../lib/auth";
-import prisma from "../../lib/prisma";
+import { validateToken } from "../../helper/auth";
+import prisma from "../../helper/prisma";
 import GradientLayout from "../../components/dashboard/gradientLayout";
 import ListSongs from "../../components/dashboard/listSongs";
 

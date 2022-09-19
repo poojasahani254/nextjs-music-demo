@@ -45,16 +45,16 @@ const Slider = () => {
         }}
       >
         <div>
-          <img alt="" src="/image/img1.jpg" />
+          <img alt="" src="/slider/img1.jpg" />
         </div>
         <div>
-          <img alt="" src="/image/img2.jpg" />
+          <img alt="" src="/slider/img2.jpg" />
         </div>
         <div>
-          <img alt="" src="/image/img3.jpeg" />
+          <img alt="" src="/slider/img3.jpeg" />
         </div>
         <div>
-          <img alt="" src="/image/img4.jpeg" />
+          <img alt="" src="/slider/img4.jpeg" />
         </div>
       </Carousel>
     </Box>

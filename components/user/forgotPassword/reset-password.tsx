@@ -8,7 +8,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import fetcher from "../../../lib/fetcher";
+import fetcher from "../../../helper/fetcher";
 import { useRouter } from "next/router";
 
 interface ResetPasswordProps {
@@ -30,7 +30,6 @@ const ResetPassword: FC<ResetPasswordProps> = (props) => {
         },
         "POST"
       );
-      let rspData = await rsp.json();
 
       if (rsp.ok && rsp.status === 200) {
         await router.push("/signIn");
