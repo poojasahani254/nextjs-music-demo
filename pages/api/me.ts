@@ -2,11 +2,15 @@ import { validateRoute } from "../../helper/auth";
 import prisma from "../../helper/prisma";
 
 export default validateRoute(async (req, res, user) => {
-  const playlistsCount = await prisma.playlist.count({
+  const data = await prisma.user.findFirst({
     where: {
-      userId: user.id,
+      id: user.id,
     },
   });
 
-  res.json({ ...user, playlistsCount });
+  let finalizedData = Object.entries({ ...user, ...data })
+    .filter(([key, _]) => key !== "password")
+    .reduce((res, [key, value]) => ({ ...res, [key]: value }), {});
+
+  return res.json(finalizedData);
 });

@@ -17,6 +17,15 @@ model User {
   updatedAt     DateTime @updatedAt
   email         String   @unique
   password      String
+  firstName     String
+  lastName      String
+  contactNumber String?
+  address       String?
+  city          String?
+  zipCode       String?
+  state         String?
+  country       String?
+  photo         String?
   playlists     Playlist[]
   favorite      Favorite[]
   resetToken    String?

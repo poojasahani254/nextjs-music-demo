@@ -39,11 +39,11 @@ const NavMenu = [
     route: "/search",
     icon: MdSearch,
   },
-  {
-    name: "Your Library",
-    route: "/library",
-    icon: MdLibraryMusic,
-  },
+  // {
+  //   name: "Your Library",
+  //   route: "/library",
+  //   icon: MdLibraryMusic,
+  // },
 ];
 
 const PlayListMenu = [

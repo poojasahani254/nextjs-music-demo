@@ -7,8 +7,8 @@ const SignIn = () => {
 
 SignIn.authPage = true;
 
-export async function getServerSideProps({ req }: any) {
-  const user = validateToken(req.cookies.DEMO_ACCESS_TOKEN);
+export async function getServerSideProps(context: any) {
+  const user = validateToken(context.req.cookies.DEMO_ACCESS_TOKEN);
   if (user) {
     return {
       redirect: {

@@ -30,6 +30,7 @@ const Home: FC<{ artists: any; favSongs: any }> = ({ artists, favSongs }) => {
       color={"brand.50"}
       paddingY={"15px"}
       paddingX={"35px"}
+      // p={{sm: "0px"}}
       className={classes.box}
     >
       <Slider />
@@ -82,7 +83,6 @@ export const getServerSideProps = async ({ req }: any) => {
     artists = await prisma.artist.findMany({});
     favSongs = await prisma.favorite.findMany({});
   } catch (e) {
-    console.log("error--", e);
     return {
       notFound: true,
     };
