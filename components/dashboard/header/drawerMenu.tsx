@@ -34,11 +34,11 @@ const NavMenu = [
     route: "/",
     icon: MdHome,
   },
-  {
-    name: "Search",
-    route: "/search",
-    icon: MdSearch,
-  },
+  // {
+  //   name: "Search",
+  //   route: "/search",
+  //   icon: MdSearch,
+  // },
   // {
   //   name: "Your Library",
   //   route: "/library",
@@ -48,13 +48,13 @@ const NavMenu = [
 
 const PlayListMenu = [
   {
-    name: "Create Playlist",
-    route: "/createPlaylist",
+    name: "Your Playlist",
+    route: "/playlist",
     icon: MdPlaylistAdd,
   },
   {
     name: "Your Favorite",
-    route: "/yourFavorite",
+    route: "/favoriteSongs",
     icon: MdFavorite,
   },
 ];

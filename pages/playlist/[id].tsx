@@ -2,35 +2,21 @@ import { validateToken } from "../../helper/auth";
 import prisma from "../../helper/prisma";
 import GradientLayout from "../../components/dashboard/gradientLayout";
 import ListSongs from "../../components/dashboard/listSongs";
-
-const getBGColor = (id: number) => {
-  const colors = [
-    "red",
-    "green",
-    "blue",
-    "orange",
-    "purple",
-    "gray",
-    "teal",
-    "yellow",
-  ];
-
-  return colors[id - 1] || colors[Math.floor(Math.random() * colors.length)];
-};
+import { Box } from "@chakra-ui/react";
 
 const Playlist = ({ playlist }: any) => {
-  const color = getBGColor(playlist.id);
-
   return (
     <GradientLayout
-      color={color}
+      color={"brand"}
       roundImage={false}
       title={playlist.name}
       subtitle="playlist"
       description={`${playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
-      <ListSongs songs={playlist.songs} />
+      <Box bg={`brand.800`} paddingX="30px">
+        <ListSongs songs={playlist.songs} />
+      </Box>
     </GradientLayout>
   );
 };
